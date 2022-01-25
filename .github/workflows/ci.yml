@@ -4,23 +4,12 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, windows-latest]
-
         laravel: [6.*, 7.*, 8.*, 9.*]
-        dependency-version: [prefer-lowest, prefer-stable]
-        include:
-          -   laravel: 9.*
-              testbench: 7.*
-          -   laravel: 8.*
-              testbench: 6.*
-          -   laravel: 7.*
-              testbench: 5.*
-          -   laravel: 6.*
-              testbench: 4.*
+
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
@@ -35,8 +24,6 @@ jobs:
             key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
       -   name: Install dependencies
-          run: |
-            composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-            composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          run:  composer require "laravel/framework:${{ matrix.laravel }}"
       -   name: Execute tests
           run: vendor/bin/phpunit
