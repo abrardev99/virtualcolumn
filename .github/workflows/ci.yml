@@ -27,17 +27,6 @@ jobs:
       - name: Run tests
         run: vendor/bin/phpunit
 
-  phpstan:
-    name: Static analysis (PHPStan)
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install composer dependencies
-        run: composer install
-      - name: Run phpstan
-        run: vendor/bin/phpstan analyse
-
   php-cs-fixer:
     name: Code style (php-cs-fixer)
     runs-on: ubuntu-latest
