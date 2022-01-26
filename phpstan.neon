@@ -18,7 +18,7 @@ parameters:
                 - tests/*
                 - src/VirtualColumn.php
         -
-            message: '#Cannot call method (.*?) on Lean\\Gloss\\GlossTranslator\|#'
+            message: '#Cannot call method (.*?) on Stancl\\VirtualColumn\|#'
             paths:
                 - tests/*
         -
