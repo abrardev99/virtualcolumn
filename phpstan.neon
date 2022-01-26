@@ -1,0 +1,29 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+        - tests
+
+    level: 8
+
+    universalObjectCratesClasses:
+        - Illuminate\Routing\Route
+
+    ignoreErrors:
+        -
+            message: '#has no return type specified#'
+            paths:
+                - tests/*
+                - src/VirtualColumn.php
+        -
+            message: '#Cannot call method (.*?) on Lean\\Gloss\\GlossTranslator\|#'
+            paths:
+                - tests/*
+        -
+            message: '#with no type specified#'
+            paths:
+                - src/VirtualColumn.php
+
+    checkMissingIterableValueType: false
